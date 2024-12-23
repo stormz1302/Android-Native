@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public native long measureJniOverhead(long javaTimestamp);
     public native void sieveOfEratosthenesNDK(int limit);
-    public native long calculateCircleAreaNDK(double radiusLimit);
+    public native void calculateCircleAreaNDK(double radiusLimit);
+    public native void bubbleSortNDK(int countLoop);
+    public native void concatStringNDK(int countLoop);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         // Lặp lại cho các tab còn lại
     }
 
+    // ======= SO NGUYEN =======
     private void setupTabFunctionality1(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String limitText = editText.getText().toString();
@@ -131,17 +134,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // ======= DAU PHAY DONG =======
     private void setupTabFunctionality2(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
-            String radiusString = editText.getText().toString();
-                if (!radiusString.isEmpty()) {
-                    double radiusLimit = Double.parseDouble(radiusString);
+            String text = editText.getText().toString();
+                if (!text.isEmpty()) {
+                    double countLoop = Integer.parseInt(text);
 
                     // Bắt đầu đo thời gian
                     long startTime = System.nanoTime();
 
-                    // Tính diện tích hình tròn
-                    calculateCircleArea(radiusLimit);
+                    // Tính diện tích hình tròn với countLoop lần
+                    calculateCircleArea(countLoop);
 
                     // Kết thúc đo thời gian
                     long endTime = System.nanoTime();
@@ -153,11 +157,18 @@ public class MainActivity extends AppCompatActivity {
         });
         buttonNDK.setOnClickListener(v -> {
             double radiusLimit = Double.parseDouble(editText.getText().toString());
-            String result = String.valueOf(calculateCircleAreaNDK(radiusLimit));
-            textView.setText(result + "ns");
+            // Bắt đầu đo thời gian
+            long startTime = System.nanoTime();
+            calculateCircleAreaNDK(radiusLimit);
+            // Kết thúc đo thời gian
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+            // Hiển thị thời gian tính toán
+            textView.setText("Time taken: " + duration + " ns");
         });
     }
 
+    // ======= TRUY CAP BO NHO =======
     private void setupTabFunctionality3(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String sizeString = editText.getText().toString();
@@ -179,8 +190,23 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText("Array size: " + size + "\nTime taken: " + duration / 1_000_000 + " ms");
                 }
         });
+
+        buttonNDK.setOnClickListener(v -> {
+            int countLoop = Integer.parseInt(editText.getText().toString());
+            // Bắt đầu đo thời gian
+            long startTime = System.nanoTime();
+
+            bubbleSortNDK(countLoop);
+
+            // Kết thúc đo thời gian
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+            // Hiển thị thời gian tính toán
+            textView.setText("Time taken: " + duration + " ns");
+        });
     }
 
+    // ======= TRE JNI =======
     private void setupTabFunctionality4(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String iterationsString = editText.getText().toString();
@@ -211,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // ======= XU LY CHUOI =======
     private void setupTabFunctionality5(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String lengthString = editText.getText().toString();
@@ -241,6 +268,20 @@ public class MainActivity extends AppCompatActivity {
                         "Reverse Time: " + (endReverse - startReverse) / 1_000_000 + " ms\n" +
                         "Character Count Time: " + (endCount - startCount) / 1_000_000 + " ms\n" +
                         "Occurrences of 'a': " + charCount);
+        });
+
+        buttonNDK.setOnClickListener(v -> {
+            int countLoop = Integer.parseInt(editText.getText().toString());
+            // Bắt đầu đo thời gian
+            long startTime = System.nanoTime();
+
+            concatStringNDK(countLoop);
+
+            // Kết thúc đo thời gian
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+            // Hiển thị thời gian tính toán
+            textView.setText("Time taken: " + duration + " ns");
         });
     }
 }
