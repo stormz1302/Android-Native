@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <chrono>
+#include <string>
 
 extern "C"
 JNIEXPORT jlong JNICALL
@@ -17,3 +18,32 @@ Java_com_example_myapplication_MainActivity_measureJniOverhead(
     return nativeTimestamp - javaTimestamp;
 }
 
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_myapplication_MainActivity_sieveOfEratosthenesNDK(
+        JNIEnv* env,
+        jobject /* this */,
+        jint n) {
+
+    // Sàng Eratosthenes
+    std::vector<bool> sieve(n + 1, true);
+    sieve[0] = sieve[1] = false;
+
+    for (int i = 2; i * i <= n; i++) {
+        if (sieve[i]) {
+            for (int j = i * i; j <= n; j += i) {
+                sieve[j] = false;
+            }
+        }
+    }
+}
+
+
+extern "C"
+JNIEXPORT jlong JNICALL
+Java_com_example_myapplication_MainActivity_calculateCircleAreaNDK(JNIEnv *env, jobject thiz,
+                                                                   jdouble radiusLimit) {
+    // TODO: implement calculateCircleAreaNDK()
+
+}

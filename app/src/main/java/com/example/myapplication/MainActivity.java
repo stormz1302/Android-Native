@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("myapplication");
     }
     public native long measureJniOverhead(long javaTimestamp);
+    public native void sieveOfEratosthenesNDK(int limit);
+    public native long calculateCircleAreaNDK(double radiusLimit);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,10 +116,18 @@ public class MainActivity extends AppCompatActivity {
 
                         // Cập nhật giao diện trên UI Thread
                         runOnUiThread(() -> {
-                            textView.setText("Time taken: " + duration +" ns" + "\n" + duration/1000000 + "ms");
+                            textView.setText("Time taken: " + duration +" ns" + "\n" + duration + "ns");
                         });
                     }).start();
             }
+        });
+        buttonNDK.setOnClickListener(v -> {
+            int n = Integer.parseInt(editText.getText().toString());
+            long startTime = System.nanoTime();
+            sieveOfEratosthenesNDK(n);
+            long endTime = System.nanoTime();
+            long result = endTime - startTime;
+            textView.setText(result + "ns");
         });
     }
 
@@ -124,13 +135,13 @@ public class MainActivity extends AppCompatActivity {
         buttonJava.setOnClickListener(v -> {
             String radiusString = editText.getText().toString();
                 if (!radiusString.isEmpty()) {
-                    double radius = Double.parseDouble(radiusString);
+                    double radiusLimit = Double.parseDouble(radiusString);
 
                     // Bắt đầu đo thời gian
                     long startTime = System.nanoTime();
 
                     // Tính diện tích hình tròn
-                    calculateCircleArea(radius);
+                    calculateCircleArea(radiusLimit);
 
                     // Kết thúc đo thời gian
                     long endTime = System.nanoTime();
@@ -139,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
                     // Hiển thị thời gian tính toán
                     textView.setText("Time taken: " + duration + " ns");
                 }
+        });
+        buttonNDK.setOnClickListener(v -> {
+            double radiusLimit = Double.parseDouble(editText.getText().toString());
+            String result = String.valueOf(calculateCircleAreaNDK(radiusLimit));
+            textView.setText(result + "ns");
         });
     }
 
