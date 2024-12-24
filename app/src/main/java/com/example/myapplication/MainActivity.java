@@ -72,31 +72,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Xử lý sự kiện cho tab 1
-        setupTabFunctionality1(findViewById(R.id.editTextLimitTab1),
+        setupTabFunctionality1(
+                findViewById(R.id.editTextLimitTab1),
+                findViewById(R.id.editTextLimitTab1_2),
                 findViewById(R.id.calculatePrimesButtonTab1_1),
                 findViewById(R.id.calculatePrimesButtonTab1_2),
                 findViewById(R.id.primesTextViewTab1));
 
         // Xử lý sự kiện cho tab 2
-        setupTabFunctionality2(findViewById(R.id.editTextLimitTab2),
+        setupTabFunctionality2(
+                findViewById(R.id.editTextLimitTab2),
+                findViewById(R.id.editTextLimitTab2_2),
                 findViewById(R.id.calculatePrimesButtonTab2_1),
                 findViewById(R.id.calculatePrimesButtonTab2_2),
                 findViewById(R.id.primesTextViewTab2));
 
         // Xử lý sự kiện cho tab 3
-        setupTabFunctionality3(findViewById(R.id.editTextLimitTab3),
+        setupTabFunctionality3(
+                findViewById(R.id.editTextLimitTab3),
+                findViewById(R.id.editTextLimitTab3_2),
                 findViewById(R.id.calculatePrimesButtonTab3_1),
                 findViewById(R.id.calculatePrimesButtonTab3_2),
                 findViewById(R.id.primesTextViewTab3));
 
         // Xử lý sự kiện cho tab 4
-        setupTabFunctionality4(findViewById(R.id.editTextLimitTab4),
+        setupTabFunctionality4(
+                findViewById(R.id.editTextLimitTab4),
+                findViewById(R.id.editTextLimitTab4_2),
                 findViewById(R.id.calculatePrimesButtonTab4_1),
                 findViewById(R.id.calculatePrimesButtonTab4_2),
                 findViewById(R.id.primesTextViewTab4));
 
         // Xử lý sự kiện cho tab 5
-        setupTabFunctionality5(findViewById(R.id.editTextLimitTab5),
+        setupTabFunctionality5(
+                findViewById(R.id.editTextLimitTab5),
+                findViewById(R.id.editTextLimitTab5_2),
                 findViewById(R.id.calculatePrimesButtonTab5_1),
                 findViewById(R.id.calculatePrimesButtonTab5_2),
                 findViewById(R.id.primesTextViewTab5));
@@ -105,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ======= SO NGUYEN =======
-    private void setupTabFunctionality1(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
+    private void setupTabFunctionality1(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String limitText = editText.getText().toString();
             if (!limitText.isEmpty()) {
@@ -135,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ======= DAU PHAY DONG =======
-    private void setupTabFunctionality2(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
+    private void setupTabFunctionality2(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String text = editText.getText().toString();
                 if (!text.isEmpty()) {
@@ -169,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ======= TRUY CAP BO NHO =======
-    private void setupTabFunctionality3(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
+    private void setupTabFunctionality3(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String sizeString = editText.getText().toString();
                 if (!sizeString.isEmpty()) {
@@ -207,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ======= TRE JNI =======
-    private void setupTabFunctionality4(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
+    private void setupTabFunctionality4(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String iterationsString = editText.getText().toString();
             if (!iterationsString.isEmpty()) {
@@ -238,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ======= XU LY CHUOI =======
-    private void setupTabFunctionality5(EditText editText, Button buttonNDK, Button buttonJava, TextView textView) {
+    private void setupTabFunctionality5(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String lengthString = editText.getText().toString();
             //if (!lengthString.length() == 0 ) {

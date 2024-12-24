@@ -43,7 +43,14 @@
                 android:id="@+id/editTextLimitTab1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter limit (e.g., 100000)"
+                android:hint="Count loop"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextLimitTab1_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Array size"
                 android:inputType="number" />
 
             <Button
@@ -81,7 +88,14 @@
                 android:id="@+id/editTextLimitTab2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter limit (e.g., 100000)"
+                android:hint="Count loop"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextLimitTab2_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Array size"
                 android:inputType="number" />
 
             <Button
@@ -118,7 +132,14 @@
                 android:id="@+id/editTextLimitTab3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter limit (e.g., 100000)"
+                android:hint="Count loop"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextLimitTab3_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Array size"
                 android:inputType="number" />
 
             <Button
@@ -154,7 +175,14 @@
                 android:id="@+id/editTextLimitTab4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter limit (e.g., 100000)"
+                android:hint="Count loop"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextLimitTab4_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Array size"
                 android:inputType="number" />
 
             <Button
@@ -190,7 +218,14 @@
                 android:id="@+id/editTextLimitTab5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter limit (e.g., 100000)"
+                android:hint="Count loop"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextLimitTab5_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Array size"
                 android:inputType="number" />
 
             <Button
