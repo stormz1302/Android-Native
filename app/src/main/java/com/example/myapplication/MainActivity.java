@@ -117,21 +117,13 @@ public class MainActivity extends AppCompatActivity {
     // ======= SO NGUYEN =======
     private void setupTabFunctionality1(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
-            String limitText = editText.getText().toString();
-            if (!limitText.isEmpty()) {
-                int limit = Integer.parseInt(limitText);
-                    // Chuyển xử lý sang Background Thread
-                    new Thread(() -> {
-                        long startTime = System.nanoTime();
-                        sieveOfEratosthenes(limit); // Thực hiện tính toán
-                        long endTime = System.nanoTime();
-                        long duration = endTime - startTime;
-
-                        // Cập nhật giao diện trên UI Thread
-                        runOnUiThread(() -> {
-                            textView.setText("Time taken: " + duration +" ns" + "\n" + duration + "ns");
-                        });
-                    }).start();
+            String countLoop = editText.getText().toString();
+            String limit = editText_2.getText().toString();
+            if (!limit.isEmpty() && !countLoop.isEmpty()) {
+                int n = Integer.parseInt(limit);
+                int m = Integer.parseInt(countLoop);
+                double result = sieveOfEratosthenes(m, n); // Thực hiện tính toán
+                textView.setText("Result: " + result +" ns\n Total Time: " + m * result/ 1000000 + "ms");
             }
         });
         buttonNDK.setOnClickListener(v -> {
@@ -148,21 +140,23 @@ public class MainActivity extends AppCompatActivity {
     private void setupTabFunctionality2(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
             String text = editText.getText().toString();
+            String radius = editText_2.getText().toString();
                 if (!text.isEmpty()) {
                     double countLoop = Integer.parseInt(text);
+                    double radiusLimit = Double.parseDouble(radius);
 
                     // Bắt đầu đo thời gian
                     long startTime = System.nanoTime();
 
                     // Tính diện tích hình tròn với countLoop lần
-                    calculateCircleArea(countLoop);
+                    double result = calculateCircleArea(countLoop, radiusLimit);
 
                     // Kết thúc đo thời gian
                     long endTime = System.nanoTime();
                     long duration = endTime - startTime;
 
                     // Hiển thị thời gian tính toán
-                    textView.setText("Time taken: " + duration + " ns");
+                    textView.setText("Result: " + result +" ns\nTime taken: " + duration /1000000 + " ms");
                 }
         });
         buttonNDK.setOnClickListener(v -> {
@@ -181,23 +175,22 @@ public class MainActivity extends AppCompatActivity {
     // ======= TRUY CAP BO NHO =======
     private void setupTabFunctionality3(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
-            String sizeString = editText.getText().toString();
-                if (!sizeString.isEmpty()) {
-                    int size = Integer.parseInt(sizeString);
-
+            String countLoop = editText.getText().toString();
+            String arraySize = editText_2.getText().toString();
+                if (!arraySize.isEmpty() && !countLoop.isEmpty()) {
+                    int n = Integer.parseInt(arraySize);
+                    int m = Integer.parseInt(countLoop);
                     // Tạo mảng ngẫu nhiên
-                    int[] array = generateRandomArray(size);
-
                     // Đo thời gian thực thi Bubble Sort
                     long startTime = System.nanoTime();
-                    bubbleSort(array);
+                    double result = bubbleSort(m, n);
                     long endTime = System.nanoTime();
 
                     // Tính thời gian thực thi
                     long duration = endTime - startTime;
 
                     // Hiển thị kết quả
-                    textView.setText("Array size: " + size + "\nTime taken: " + duration / 1_000_000 + " ms");
+                    textView.setText("Result: " + result + "ns\nTotal Time: " + duration / 1_000_000 + " ms");
                 }
         });
 
@@ -219,30 +212,25 @@ public class MainActivity extends AppCompatActivity {
     // ======= TRE JNI =======
     private void setupTabFunctionality4(EditText editText, EditText editText_2, Button buttonNDK, Button buttonJava, TextView textView) {
         buttonJava.setOnClickListener(v -> {
-            String iterationsString = editText.getText().toString();
-            if (!iterationsString.isEmpty()) {
-                int iterations = Integer.parseInt(iterationsString);
-
-                // Biến để lưu tổng thời gian
-                long totalDelay = 0;
-
-                for (int i = 0; i < iterations; i++) {
-                    // Ghi lại thời gian trước khi gọi JNI
+            String loopCount = editText.getText().toString();
+            //String arraySize = editText_2.getText().toString();
+            if (!loopCount.isEmpty()) {
+                long m = Integer.parseInt(loopCount);
+                // Ghi lại thời gian trước khi gọi JNI
+                double sum = 0.0;
+                for (int i = 0; i < m; i++){
                     long javaTimestamp = System.nanoTime();
-
                     // Gọi hàm native để đo độ trễ
                     long delay = measureJniOverhead(javaTimestamp);
-
-                    // Cộng dồn thời gian trễ
-                    totalDelay += delay;
+                    System.out.println("Delay: " + delay + " ns");
+                    sum += (double) 1 / delay;
+                    System.out.println("Sum: " + sum);
                 }
-
-                // Tính thời gian trung bình
-                double averageDelay = (double) totalDelay / iterations;
+                //System.out.println("Sum: " + sum);
+                double result = m/sum;
 
                 // Hiển thị kết quả
-                textView.setText("Total JNI Overhead: " + totalDelay / 1_000_000 + " ms\n" +
-                        "Average JNI Call Overhead: " + averageDelay + " ns");
+                textView.setText("Result: " + result + " ns\nTotal Time: " + m * result/ 1000000 + "ms");
             }
         });
     }

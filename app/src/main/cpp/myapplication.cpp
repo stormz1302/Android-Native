@@ -15,7 +15,13 @@ Java_com_example_myapplication_MainActivity_measureJniOverhead(
     auto nativeTimestamp = std::chrono::duration_cast<std::chrono::nanoseconds>(
             nativeStartTime.time_since_epoch()).count();
 
-    return nativeTimestamp - javaTimestamp;
+    // Ghi lại thời gian sau khi xử lý
+    auto nativeEndTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            nativeEndTime - nativeStartTime).count();
+
+    // Trả về thời gian của một vòng (tính bằng nanoseconds)
+    return duration;
 }
 
 
